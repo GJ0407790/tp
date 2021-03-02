@@ -12,11 +12,7 @@ import java.util.stream.Stream;
 
 import seedu.smartlib.logic.commands.AddCommand;
 import seedu.smartlib.logic.parser.exceptions.ParseException;
-import seedu.smartlib.model.reader.Address;
-import seedu.smartlib.model.reader.Email;
-import seedu.smartlib.model.reader.Name;
-import seedu.smartlib.model.reader.Phone;
-import seedu.smartlib.model.reader.Reader;
+import seedu.smartlib.model.reader.*;
 import seedu.smartlib.model.tag.Tag;
 
 /**
@@ -42,9 +38,10 @@ public class AddCommandParser implements Parser<AddCommand> {
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
+        Remark remark = new Remark(""); // add command does not allow adding remarks straight away
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Reader reader = new Reader(name, phone, email, address, tagList);
+        Reader reader = new Reader(name, phone, email, address, remark, tagList);
 
         return new AddCommand(reader);
     }
